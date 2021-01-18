@@ -134,9 +134,12 @@ first check it by calling 'check_window()' function'''
         file.write("\n--------------------\n")
 
     sleeptm = lefttm - wait_time
-    if print_waitTime :
-        print(f"In {prnt_sleeptm()} seconds web.whatsapp.com will open and after {wait_time} seconds message will be delivered")
-
+    while sleeptm :
+        mins, secs = divmod(sleeptm, 60) 
+        timer = '{:02d}:{:02d}'.format(mins, secs) 
+        print(f"after {wait_time} seconds message will be delivered and web.whatsapp.com will open in "+timer,end="\r" )
+        time.sleep(1) 
+        sleeptm -= 1
     time.sleep(sleeptm)
     parsedMessage = quote(message)
     web.open('https://web.whatsapp.com/send?phone='+phone_no+'&text='+parsedMessage)
